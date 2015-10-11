@@ -6,10 +6,23 @@ A proof of concept code to use vertx3 with leiningen and clojure. Eventually nee
 ## Usage
 to run this repo
 -----------------
+```
+git clone git@github.com:oneto018/vertx-3-clojure.git
+
+cd vertx-3-clojure
+
+lein run
+```
+then check urls 
+
+http://localhost:8083/
+http://localhost:8083/t1 
+http://localhost:8083/hello/somename
 
 
-expamle is in src/vertx-web_clj/core.clj
-
+how it looks like
+------------------
+full expamle is in [src/vertx-web_clj/core.clj](src/vertx-web_clj/core.clj)
 
 ```clojure
 	(defn handle-t1 [req]
@@ -42,6 +55,9 @@ expamle is in src/vertx-web_clj/core.clj
 	    (vertx/create-http-server)
 	    (http/request-handler (rt/route->handler (main-router vertx)))
 	    (http/listen 8083 listen-handler)))
+
+	(defn -main []
+	  (create-server (Vertx/vertx)))
 ```
 
 ## License
