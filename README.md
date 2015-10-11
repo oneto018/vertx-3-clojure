@@ -15,14 +15,14 @@ lein run
 ```
 then check urls 
 
-http://localhost:8083/
-http://localhost:8083/t1 
-http://localhost:8083/hello/somename
+[http://localhost:8083/](http://localhost:8083/)
+[http://localhost:8083/t1 ]([http://localhost:8083/t1)
+[http://localhost:8083/hello/somename](http://localhost:8083/hello/somename)
 
 
 how it looks like
 ------------------
-full expamle is in [src/vertx-web_clj/core.clj](src/vertx-web_clj/core.clj)
+full expamle is in [src/vertx-web_clj/core.clj](https://github.com/oneto018/vertx-3-clojure/blob/master/src/vertx_web_clj/core.clj)
 
 ```clojure
 	(defn handle-t1 [req]
@@ -59,6 +59,16 @@ full expamle is in [src/vertx-web_clj/core.clj](src/vertx-web_clj/core.clj)
 	(defn -main []
 	  (create-server (Vertx/vertx)))
 ```
+
+simple-handler
+--------------
+```clojure
+
+	(-> (Vertx/vertx)
+		(vertx/create-http-server)
+		(http/request-handler 
+			#(http/response-end (http/response %) "hello world from clojure vertx3"))
+		(http/listen 8083))
 
 ## License
 
