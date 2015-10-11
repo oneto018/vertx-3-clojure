@@ -1,10 +1,48 @@
 # vertx-web-clj
 
-A Clojure library designed to ... well, that part is up to you.
+A proof of concept code to use vertx3 with leiningen and clojure. Eventually need to create clojure wrapper library for vertx 3. For now few utilities and warpper functions for vertx core and vertx web is written .
+
 
 ## Usage
+to run this repo
+-----------------
 
-FIXME
+
+expamle is in src/vertx-web_clj/core.clj
+
+
+```clojure
+	(defn handle-t1 [req]
+	  (-> (http/response req)
+	      (http/response-end "t1 content")))
+
+	(defn handle-hello [req]
+	  (-> (http/response req)
+	      (http/response-end (str "hello " (http/param req "name") "!"))))
+
+	(defn handle-post-name [req]
+	  (-> (http/response req)
+	      (http/response-end "post request display")))
+
+	(defn main-router [vertx]
+	  (->
+	    (rt/router vertx)
+	    (GET "/" #(http/response-end (http/response %) "home page"))
+	    (GET "/t1" handle-t1)
+	    (POST "/p1" handle-post-name)
+	    (GET "/hello/:name" handle-hello)))
+
+
+	(defn listen-handler [server]
+	  (println "server started and running at port 8083" server))
+
+	(defn create-server [vertx]
+	  (->
+	    vertx
+	    (vertx/create-http-server)
+	    (http/request-handler (rt/route->handler (main-router vertx)))
+	    (http/listen 8083 listen-handler)))
+```
 
 ## License
 
