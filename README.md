@@ -69,6 +69,7 @@ simple-handler
 		(http/request-handler 
 			#(http/response-end (http/response %) "hello world from clojure vertx3"))
 		(http/listen 8083))
+```
 
 ## License
 
