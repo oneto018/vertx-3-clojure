@@ -3,7 +3,7 @@
             [vertx.http :as http]
             [vertx.route :as rt :refer [GET POST PUT DELETE]])
   (:import (io.vertx.core Vertx Handler Future AsyncResult)
-           (io.vertx.core.http HttpServer HttpServerOptions 
+           (io.vertx.core.http HttpServer HttpServerOptions
                                HttpServerRequest HttpServerResponse)
             (io.vertx.ext.web RoutingContext Route Router)))
 
@@ -12,11 +12,11 @@
   (Thread/sleep (* sec 1000))
   sec)
 
-(defn blocking-handler 
+(defn blocking-handler
   []
   (block 10))
 
-(defn res-handler 
+(defn res-handler
   [res]
   (println "after 30 secs " res))
 
@@ -30,7 +30,7 @@
 
 (defn handle-post-name [req]
   (-> (http/response req)
-      (http/response-end "post request display")))
+      (http/response-end (str "post request display - name: " (http/param req "name")))))
 
 (defn main-router [vertx]
   (->
