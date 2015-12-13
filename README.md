@@ -13,10 +13,10 @@ cd vertx-3-clojure
 
 lein run
 ```
-then check urls 
+then check urls
 
 [http://localhost:8083/](http://localhost:8083/)
-[http://localhost:8083/t1 ]([http://localhost:8083/t1)
+[http://localhost:8083/t1]([http://localhost:8083/t1)
 [http://localhost:8083/hello/somename](http://localhost:8083/hello/somename)
 
 
@@ -34,8 +34,8 @@ full expamle is in [src/vertx-web_clj/core.clj](https://github.com/oneto018/vert
 	      (http/response-end (str "hello " (http/param req "name") "!"))))
 
 	(defn handle-post-name [req]
-	  (-> (http/response req)
-	      (http/response-end "post request display")))
+		(-> (http/response req)
+				(http/response-end (str "post request display - name: " (http/param req "name")))))
 
 	(defn main-router [vertx]
 	  (->
@@ -66,7 +66,7 @@ simple-handler
 
 	(-> (Vertx/vertx)
 		(vertx/create-http-server)
-		(http/request-handler 
+		(http/request-handler
 			#(http/response-end (http/response %) "hello world from clojure vertx3"))
 		(http/listen 8083))
 ```
